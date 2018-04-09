@@ -1,0 +1,16 @@
+
+body {
+	
+    background-image: url("../../assets/images/questionMarks3.jpg");  
+
+}
+
+.jumbotron {
+
+    background-image: url("../../assets/images/questionMarks3.jpg");
+    color: red;
+    text-shadow: 2px 2px black;  
+
+}
+
+
