@@ -10,7 +10,7 @@ body {
     box-shadow: 4px 4px red;
     }
 
-.jumbotron {
+#titleDiv {
     background-image: url("../../assets/images/questionMarks3.jpg");
     font-size: 100px;
     color: red;
@@ -31,10 +31,9 @@ body {
 }
 
 #scoreboard {
-    font-size: 50px;
+    font-size: 35px;
     color: black;
-    /* text-shadow: 2px 2px red; */
-    background: transparent;
+    background: grey;
 }
 
 .answer {
@@ -51,7 +50,13 @@ body {
 #winSection{
     font-size: 50px;
     color: red;
-    text-shadow: 2px 2px black;  
+    text-shadow: 2px 2px black;
 }
 
+.next {
+    font-size: 35px;
+    border: 1px solid;
+    width: 20%;
+    white-space: normal;
+}
 

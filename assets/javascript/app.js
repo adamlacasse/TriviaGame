@@ -5,6 +5,8 @@ $(document).ready(function(){
     $("#loseSection").hide();
     $("#timer").hide();
     $("#scoreboard").hide();
+    $("#nextQuestion").hide();
+    $("#seeResults").hide();
 
     $("#start-button").on("click",function(){
         $("#start-button").remove();
@@ -62,16 +64,19 @@ var unanswered = 11;
 
 
 function loadQuestion(){
+    $("#nextQuestion").hide();
+    $("#loseSection").hide();
+    $("#winSection").hide();
     $("#timer").show();
     $("#answersSection").show();
     $("#scoreboard").show();
-    $("#scoreboard").append("Correct Answers: " + correct + "  //  Incorrect Answers: " + incorrect);
+    $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
 
-    $("#questionSection").append("Q: " + questions[currentQuestion].question);
-    $("#butA0").append(questions[currentQuestion].choices[0]);
-    $("#butA1").append(questions[currentQuestion].choices[1]);
-    $("#butA2").append(questions[currentQuestion].choices[2]);
-    $("#butA3").append(questions[currentQuestion].choices[3]);
+    $("#questionSection").text("Q: " + questions[currentQuestion].question);
+    $("#butA0").text(questions[currentQuestion].choices[0]);
+    $("#butA1").text(questions[currentQuestion].choices[1]);
+    $("#butA2").text(questions[currentQuestion].choices[2]);
+    $("#butA3").text(questions[currentQuestion].choices[3]);
 } // end of loadQuestion()
 
 $("#butA0").on("click",function(){
@@ -109,16 +114,28 @@ function correctAnswer(){
     $("#answersSection").hide();
     $("#timer").hide();
     $("#winSection").show();
-    correct = correct + 1;
+    correct++;
+    if(correct + incorrect < 10){
+        $("#nextQuestion").show();
+        } else {$("#seeResults").show(); $("#nextQuestion").hide();}
 }
 
 function incorrectAnswer(){
     $("#answersSection").hide();
     $("#timer").hide();
     $("#loseSection").show();
-    incorrect = incorrect + 1;
-    
+    incorrect++;
+    $("#nextQuestion").show();
+    if(correct + incorrect < 10){
+        $("#nextQuestion").show();
+        } else {$("#seeResults").show(); $("#nextQuestion").hide();}
 }
+
+$("#nextQuestion").on("click",function(){
+    currentQuestion++;    
+    loadQuestion();
+});
+
 
 
 }); // end of document.ready
