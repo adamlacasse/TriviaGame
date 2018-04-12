@@ -60,12 +60,12 @@ var questions = [
 var currentQuestion = 0;
 var correct = 0;
 var incorrect =  0;
-// var timer = 5;
 
 function loadQuestion(){
     $("#nextQuestion").hide();
     $("#loseSection").hide();
     $("#winSection").hide();
+    $("#timeout").hide();
     $("#timer").show();
     $("#answersSection").show();
     $("#scoreboard").show();
@@ -77,9 +77,7 @@ function loadQuestion(){
     $("#butA2").text(questions[currentQuestion].choices[2]);
     $("#butA3").text(questions[currentQuestion].choices[3]);
 
-    // clock();
-    // if(timer == 0){timeOut();}
-
+// ====================== TIMER MADNESS ==========================================================================    
     var timeleft = 10;
     var downloadTimer = setInterval(function(){
     timeleft--;
@@ -90,45 +88,33 @@ function loadQuestion(){
         }
     },1000);
 
+// ===============================================================================================================    
+
 } // end of loadQuestion()
 
-// function clock(){
-//     setInterval(
-//         function countdown(){    
-//             $("#timer").html(timer--);
-//         }, 1000);
-// } 
-
-$("#butA0").on("click",function(){
+$("#butA0").on("click", function(){
     if(questions[currentQuestion].choices[0] === questions[currentQuestion].correctAnswer){
         correctAnswer();
     } else incorrectAnswer();
 });
 
-$("#butA1").on("click",function(){
+$("#butA1").on("click", function(){
     if(questions[currentQuestion].choices[1] === questions[currentQuestion].correctAnswer){
         correctAnswer();
     } else incorrectAnswer();
 });
 
-$("#butA2").on("click",function(){
+$("#butA2").on("click", function(){
     if(questions[currentQuestion].choices[2] === questions[currentQuestion].correctAnswer){
         correctAnswer();
     } else incorrectAnswer();
 });
 
-$("#butA3").on("click",function(){
+$("#butA3").on("click", function(){
     if(questions[currentQuestion].choices[3] === questions[currentQuestion].correctAnswer){
         correctAnswer();
     } else incorrectAnswer();
 });
-
-// =================================TESTING=====================================================
-
-
-
-
-// =============================================================================================
 
 function correctAnswer(){
     $("#answersSection").hide();
@@ -154,18 +140,19 @@ function timeOut(){
     $("#answersSection").hide();
     $("#timer").hide();
     $("#timeoutSection").show();
+    $("#timeout").show();
     incorrect++;
     if(correct + incorrect < questions.length){
         $("#nextQuestion").show();
         } else {$("#seeResults").show(); $("#nextQuestion").hide();}
 }
 
-$("#nextQuestion").on("click",function(){
+$("#nextQuestion").on("click", function(){
     currentQuestion++;    
     loadQuestion();
 });
 
-$("#seeResults").on("click",function(){
+$("#seeResults").on("click", function(){
     $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
     $(".main-action").html("<img id='lose' src ='./assets/images/theEnd.jpg'></img>");
 });
