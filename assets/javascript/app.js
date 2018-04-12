@@ -7,6 +7,7 @@ $(document).ready(function(){
     $("#scoreboard").hide();
     $("#nextQuestion").hide();
     $("#seeResults").hide();
+    $("#timeoutSection").hide();
 
     $("#start-button").on("click",function(){
         $("#start-button").remove();
@@ -112,14 +113,7 @@ $("#butA3").on("click",function(){
     } else incorrectAnswer();
 });
 
-$("#butA4").on("click",function(){
-    if(questions[currentQuestion].choices[4] === questions[currentQuestion].correctAnswer){
-        correctAnswer();
-    } else incorrectAnswer();
-});
-
-// =============================================================================================
-
+// =================================TESTING====================================
 
 
 
@@ -149,6 +143,7 @@ function incorrectAnswer(){
 function timeOut(){
     $("#answersSection").hide();
     $("#timer").hide();
+    $("#timeoutSection").show();
     incorrect++;
     if(correct + incorrect < questions.length){
         $("#nextQuestion").show();
