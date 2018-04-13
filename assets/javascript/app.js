@@ -159,4 +159,4 @@ $(document).ready(function(){
         $(".main-action").html("<img id='lose' src ='./assets/images/theEnd.jpg'></img>");
     });
 
-}); // end of document.ready
+});
