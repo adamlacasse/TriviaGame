@@ -82,7 +82,7 @@ $(document).ready(function(){
     } 
 
     function countdown() {
-        var seconds = 30;
+        var seconds = 60;
         var counter = setInterval(function(){
             seconds--;
             $("#timer").text(seconds);
