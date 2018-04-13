@@ -21,16 +21,16 @@ var questions = [
     },
     {   question:"The average human body contains how many pints of blood?",
     correctAnswer:"9",
-    choices: ["9","12","5","20"] } // DON'T FORGET TO GET RID OF THIS "}"
-    // },
-    // {   question:"According to Greek mythology who was the first woman on earth?",
-    // correctAnswer:"Pandora",
-    // choices: ["Aphrodite","Daphne","Persephone","Pandora"]
-    // },
-    // {   question:"In which country would you find the Ian Fleming International Airport, named after the James Bond author?",
-    // correctAnswer:"Jamaica",
-    // choices: ["England","Jamaica","United States","Denmark"]
-    // },
+    choices: ["9","12","5","20"] 
+    },
+    {   question:"According to Greek mythology who was the first woman on earth?",
+    correctAnswer:"Pandora",
+    choices: ["Aphrodite","Daphne","Persephone","Pandora"]
+    },
+    {   question:"In which country would you find the Ian Fleming International Airport, named after the James Bond author?",
+    correctAnswer:"Jamaica",
+    choices: ["England","Jamaica","United States","Denmark"] } // DON'T FORGET TO GET RID OF THIS "}"
+    // }, 
     // {   question:"From which language does the word ‘futon’ originate?",
     // correctAnswer:"Japanese",
     // choices: ["Japanese","Chinese","Dutch","None, it's a made up word"]
@@ -62,6 +62,7 @@ var correct = 0;
 var incorrect =  0;
 
 function loadQuestion(){
+
     $("#nextQuestion").hide();
     $("#loseSection").hide();
     $("#winSection").hide();
@@ -71,28 +72,42 @@ function loadQuestion(){
     $("#scoreboard").show();
     $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
 
+    // ====================== TIMER MADNESS ==========================================================================    
+    // "#timer" is the HTML object
+    // timeOut() is the function
+  
+    function countdown() {
+        var seconds = 7;
+        var counter = setInterval(function(){            
+            seconds--;
+            $("#timer").text(seconds);
+            if (seconds == 0){
+                timeOut();
+                clearInterval(counter);
+            }
+        }, 1000);
+
+
+    } // end of countdown function
+   
+    countdown();   
+    // ===============================================================================================================   
+
     $("#questionSection").text("Q: " + questions[currentQuestion].question);
     $("#butA0").text(questions[currentQuestion].choices[0]);
     $("#butA1").text(questions[currentQuestion].choices[1]);
     $("#butA2").text(questions[currentQuestion].choices[2]);
     $("#butA3").text(questions[currentQuestion].choices[3]);
 
-// ====================== TIMER MADNESS ==========================================================================    
-    var timeleft = 10;
-    var downloadTimer = setInterval(function(){
-    timeleft--;
-    document.getElementById("timer").textContent = timeleft;
-    if(timeleft <= 0){
-        clearInterval(downloadTimer);
-        timeOut();
-        }
-    },1000);
-
-// ===============================================================================================================    
+    
 
 } // end of loadQuestion()
 
+
+
+
 $("#butA0").on("click", function(){
+    timeleft = 10;
     if(questions[currentQuestion].choices[0] === questions[currentQuestion].correctAnswer){
         correctAnswer();
     } else incorrectAnswer();
@@ -124,6 +139,7 @@ function correctAnswer(){
     if(correct + incorrect < questions.length){
         $("#nextQuestion").show();
         } else {$("#seeResults").show(); $("#nextQuestion").hide();}
+    $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
 }
 
 function incorrectAnswer(){
@@ -134,6 +150,7 @@ function incorrectAnswer(){
     if(correct + incorrect < questions.length){
         $("#nextQuestion").show();
         } else {$("#seeResults").show(); $("#nextQuestion").hide();}
+    $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
 }
 
 function timeOut(){
@@ -145,10 +162,12 @@ function timeOut(){
     if(correct + incorrect < questions.length){
         $("#nextQuestion").show();
         } else {$("#seeResults").show(); $("#nextQuestion").hide();}
+    $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
+    
 }
 
 $("#nextQuestion").on("click", function(){
-    currentQuestion++;    
+    currentQuestion++;
     loadQuestion();
 });
 
@@ -156,7 +175,5 @@ $("#seeResults").on("click", function(){
     $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
     $(".main-action").html("<img id='lose' src ='./assets/images/theEnd.jpg'></img>");
 });
-
-
 
 }); // end of document.ready
