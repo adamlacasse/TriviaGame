@@ -45,7 +45,7 @@ $(document).ready(function(){
         choices: ["home computer","dishwasher","cordless phone","compact disk player"]
         },
         {   question:"Who was the first black American pictured on a US postage stamp?",
-        correctAnswer:"Joe Louis",
+        correctAnswer:"Booker T. Washington",
         choices: ["Joe Louis","Booker T. Washington","Louis Armstrong","Frederick Douglass"]
         },
         {   question:"Which album features the song 'Come Together'?",
