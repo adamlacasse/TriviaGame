@@ -53,27 +53,37 @@ $(document).ready(function () {
     ]
 
     const currentQuestion = 0;
+    let timer;
+    let countdown = 20;
 
     function loadQuestion() {
         // put the question at the top
-        $("#gameplay").append(`<div class="" style="width: 50%">${questions[currentQuestion].question}</div><br>`)
+        $("#question").css("display", "true")
+        $("#question").html(`<div class="" style="width: 50%">${questions[currentQuestion].question}</div><br>`)
         // make buttons for each choice
         questions[currentQuestion].choices.forEach(c => {
-            $("#gameplay").append(`<button class="btn btn-dark btn-lg m-1 answer" style="width: 50%">${c}</button><br>`)
+            $("#answers").append(`<button class="btn btn-dark btn-lg m-1 answer" style="width: 50%">${c}</button><br>`)
         })
     }
 
-    $("#start-button").on("click", function() {
+    $("#start-button").on("click", function () {
         $("#start-button").remove();
         loadQuestion();
     });
 
-    $("body").on("click", ".answer", function(){
-        // $(this).attr("class", "btn btn-success btn-lg m-1 answer")
-        
-    })
-
-
+    $("body").on("click", ".answer", function () {
+        $(this).attr("class", "btn btn-success btn-lg m-1 answer")
+        if ($(this).attr("data-timer") === "on") {
+            clearInterval(timer);
+            $(this).attr("data-timer", "off")
+        } else {
+            timer = setInterval(() => {
+                countdown--
+                console.log(countdown)
+            }, 1000)
+            $(this).attr("data-timer", "on")
+        }
+    });
 
 
 

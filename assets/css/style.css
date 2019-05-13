@@ -16,13 +16,9 @@ body {
     border-color: white;
 }
 
-/* #gameplay {
-    to center vertically
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
+#question {
+    font-size: 30px;
+}
 
 button {
     background: transparent !important;
