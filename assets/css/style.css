@@ -2,4 +2,39 @@ body {
     background-image: url("../images/question-marks-large-black-red.jpg");
     background-attachment: fixed;
     background-size: cover;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
+}
+
+.jumbotron {
+    margin: 10px;
+    padding: 0;
+    font-size: 50px;
+    background: transparent;
+    border-style: solid;
+    border-color: white;
+}
+
+.jumbotron p {
+    font-size: 25px;
+}
+
+#start-button {
+    background: transparent;
+    border-color: white;
+}
+
+.main-content {
+    min-height: calc(100vh - 80px);
+}
+
+#footer {
+    height: 50px;
+    margin: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
 }
