@@ -4,6 +4,7 @@ body {
     background-size: cover;
     font-family: 'Source Sans Pro', sans-serif;
     color: white;
+    text-align: center;
 }
 
 .jumbotron {
@@ -15,26 +16,17 @@ body {
     border-color: white;
 }
 
-.jumbotron p {
-    font-size: 25px;
-}
-
 #start-button {
     background: transparent;
     border-color: white;
 }
 
 .main-content {
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 110px);
 }
 
 #footer {
-    height: 50px;
+    height: 75px;
     margin: 10px;
-    border-style: solid;
-    border-width: thin;
-    border-color: white;
-    padding: 5px;
     font-size: 15px;
-    text-align: center;
 }
