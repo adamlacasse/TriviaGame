@@ -19,6 +19,7 @@ body {
 #start-button {
     background: transparent;
     border-color: white;
+    /* to center vertically */
     position: fixed;
     top: 50%;
     left: 50%;
