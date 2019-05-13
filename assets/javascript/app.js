@@ -1,162 +1,91 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    $("#answersSection").hide();
-    $("#winSection").hide();
-    $("#loseSection").hide();
-    $("#timer").hide();
-    $("#scoreboard").hide();
-    $("#nextQuestion").hide();
-    $("#seeResults").hide();
-    $("#timeoutSection").hide();
-
-    $("#start-button").on("click",function(){
-        $("#start-button").remove();
-        loadQuestion();
-        countdown();        
-    });
-
-    var questions = [
-        {   question:"Which singer's real name is Stefani Joanne Angelina Germanotta?",
-            correctAnswer:"Lady Gaga",
-            choices: ["Madonna","Gwen Stefani","Lady Gaga","Sufjan Stevens"]  
+    const questions = [{
+            question: "Which singer's real name is Stefani Joanne Angelina Germanotta?",
+            correctAnswer: "Lady Gaga",
+            choices: ["Madonna", "Gwen Stefani", "Lady Gaga", "Sufjan Stevens"]
         },
-        {   question:"The average human body contains how many pints of blood?",
-        correctAnswer:"9",
-        choices: ["9","12","5","20"] 
+        {
+            question: "The average human body contains how many pints of blood?",
+            correctAnswer: "9",
+            choices: ["9", "12", "5", "20"]
         },
-        {   question:"According to Greek mythology who was the first woman on earth?",
-        correctAnswer:"Pandora",
-        choices: ["Aphrodite","Daphne","Persephone","Pandora"]
+        {
+            question: "According to Greek mythology who was the first woman on earth?",
+            correctAnswer: "Pandora",
+            choices: ["Aphrodite", "Daphne", "Persephone", "Pandora"]
         },
-        {   question:"In which country would you find the Ian Fleming International Airport, named after the James Bond author?",
-        correctAnswer:"Jamaica",
-        choices: ["England","Jamaica","United States","Denmark"]
-        }, 
-        {   question:"From which language does the word ‘futon’ originate?",
-        correctAnswer:"Japanese",
-        choices: ["Japanese","Chinese","Dutch","None, it's a made up word"]
+        {
+            question: "In which country would you find the Ian Fleming International Airport, named after the James Bond author?",
+            correctAnswer: "Jamaica",
+            choices: ["England", "Jamaica", "United States", "Denmark"]
         },
-        {   question:"In the year 1900 what were the most popular baby names in the US?",
-        correctAnswer:"John and Mary",
-        choices: ["John and Mary","Joseph and Catherine","George and Anne"," William and Elizabeth"]
+        {
+            question: "From which language does the word ‘futon’ originate?",
+            correctAnswer: "Japanese",
+            choices: ["Japanese", "Chinese", "Dutch", "None, it's a made up word"]
         },
-        {   question:"Which of the following items was owned by the fewest US homes in 1990?",
-        correctAnswer:"compact disk player",
-        choices: ["home computer","dishwasher","cordless phone","compact disk player"]
+        {
+            question: "In the year 1900 what were the most popular baby names in the US?",
+            correctAnswer: "John and Mary",
+            choices: ["John and Mary", "Joseph and Catherine", "George and Anne", " William and Elizabeth"]
         },
-        {   question:"Who was the first black American pictured on a US postage stamp?",
-        correctAnswer:"Booker T. Washington",
-        choices: ["Joe Louis","Booker T. Washington","Louis Armstrong","Frederick Douglass"]
+        {
+            question: "Which of the following items was owned by the fewest US homes in 1990?",
+            correctAnswer: "compact disk player",
+            choices: ["home computer", "dishwasher", "cordless phone", "compact disk player"]
         },
-        {   question:"Which album features the song 'Come Together'?",
-        correctAnswer:"Abbey Road",
-        choices: ["Abbey Road","Revolver","Help!","Rubber Soul"]
+        {
+            question: "Who was the first black American pictured on a US postage stamp?",
+            correctAnswer: "Booker T. Washington",
+            choices: ["Joe Louis", "Booker T. Washington", "Louis Armstrong", "Frederick Douglass"]
         },
-        {   question:"Which of these songs was written by the band Aerosmith?",
-        correctAnswer:"Dream On",
-        choices: ["Whole Lotta Love","Rumours","Uptown Funk","Dream On"]
+        {
+            question: "Which album features the song 'Come Together'?",
+            correctAnswer: "Abbey Road",
+            choices: ["Abbey Road", "Revolver", "Help!", "Rubber Soul"]
+        },
+        {
+            question: "Which of these songs was written by the band Aerosmith?",
+            correctAnswer: "Dream On",
+            choices: ["Whole Lotta Love", "Rumours", "Uptown Funk", "Dream On"]
         }
     ]
 
-    var currentQuestion = 0;
-    var correct = 0;
-    var incorrect =  0;
-    var totalQuestions = questions.length;
+    const currentQuestion = 0;
 
-    function loadQuestion(){
-
-        $("#nextQuestion").hide();
-        $("#loseSection").hide();
-        $("#winSection").hide();
-        $("#timeout").hide();
-        $("#timer").show();
-        $("#answersSection").show();
-        $("#scoreboard").show();
-        $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
-        
-        $("#questionSection").text("Q: " + questions[currentQuestion].question);
-        $("#butA0").text(questions[currentQuestion].choices[0]);
-        $("#butA1").text(questions[currentQuestion].choices[1]);
-        $("#butA2").text(questions[currentQuestion].choices[2]);
-        $("#butA3").text(questions[currentQuestion].choices[3]);
-    } 
-
-    function countdown() {
-        var seconds = 60;
-        var counter = setInterval(function(){
-            seconds--;
-            $("#timer").text(seconds);
-            if (seconds == 0){
-                timeOut();
-                clearInterval(counter);
-            };
-        }, 1000); 
+    function loadQuestion() {
+        // put the question at the top
+        $("#gameplay").append(`<div class="" style="width: 50%">${questions[currentQuestion].question}</div><br>`)
+        // make buttons for each choice
+        questions[currentQuestion].choices.forEach(c => {
+            $("#gameplay").append(`<button class="btn btn-dark btn-lg m-1 answer" style="width: 50%">${c}</button><br>`)
+        })
     }
 
-    $("#butA0").on("click", function(){
-        if(questions[currentQuestion].choices[0] === questions[currentQuestion].correctAnswer){
-            correctAnswer();
-        } else incorrectAnswer();
-    });
-
-    $("#butA1").on("click", function(){
-        if(questions[currentQuestion].choices[1] === questions[currentQuestion].correctAnswer){
-            correctAnswer();
-        } else incorrectAnswer();
-    });
-
-    $("#butA2").on("click", function(){
-        if(questions[currentQuestion].choices[2] === questions[currentQuestion].correctAnswer){
-            correctAnswer();
-        } else incorrectAnswer();
-    });
-
-    $("#butA3").on("click", function(){
-        if(questions[currentQuestion].choices[3] === questions[currentQuestion].correctAnswer){
-            correctAnswer();
-        } else incorrectAnswer();
-    });
-
-    function correctAnswer(){
-        $("#answersSection").hide();
-        $("#winSection").show();
-        correct++;
-        if(correct + incorrect < questions.length){
-            $("#nextQuestion").show();
-            } else {$("#seeResults").show(); $("#nextQuestion").hide();}
-        $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
-    }
-
-    function incorrectAnswer(){
-        $("#answersSection").hide();
-        $("#loseSection").show();
-        incorrect++;
-        if(correct + incorrect < questions.length){
-            $("#nextQuestion").show();
-            } else {$("#seeResults").show(); $("#nextQuestion").hide();}
-        $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
-    }
-
-    function timeOut(){
-        $("#timer").hide();
-        $("#timeoutSection").show();
-        $("#timeout").show();
-        $("#nextQuestion").hide();
-        $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect + "<br>Unanswered Questions: "
-            + (totalQuestions - correct - incorrect)
-        );
-        $("#questionSection").html("Time's Up!");
-        $("#answersSection").html("<img id='lose' src ='./assets/images/theEnd.jpg'></img>");
-    }
-
-    $("#nextQuestion").on("click", function(){
-        currentQuestion++;
+    $("#start-button").on("click", function() {
+        $("#start-button").remove();
         loadQuestion();
     });
 
-    $("#seeResults").on("click", function(){
-        $("#scoreboard").html("Correct Answers: " + correct + "<br>Incorrect Answers: " + incorrect);
-        $(".main-action").html("<img id='lose' src ='./assets/images/theEnd.jpg'></img>");
-    });
+    $("body").on("click", ".answer", function(){
+        // $(this).attr("class", "btn btn-success btn-lg m-1 answer")
+        
+    })
 
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}); // end of document.ready
