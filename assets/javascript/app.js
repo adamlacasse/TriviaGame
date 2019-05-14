@@ -73,19 +73,22 @@ $(document).ready(function () {
 
     $("body").on("click", ".answer", function () {
         $(this).attr("class", "btn btn-success btn-lg m-1 answer")
+    });
+
+    $("#timer").on("click", function () {
         if ($(this).attr("data-timer") === "on") {
             clearInterval(timer);
             $(this).attr("data-timer", "off")
         } else {
+            countdown = 20;
+            $("#timer").text(countdown);
             timer = setInterval(() => {
                 countdown--
-                console.log(countdown)
+                $("#timer").text(countdown);
             }, 1000)
             $(this).attr("data-timer", "on")
         }
     });
-
-
 
 
 
