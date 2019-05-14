@@ -61,7 +61,7 @@ $(document).ready(function () {
     let unanswered = questions.length;
 
     $("#correct").text(`Correct: ${correct}`);
-    $("#incorrect").text(incorrect);
+    $("#incorrect").text(`Incorrect: ${incorrect}`);
 
     $("#timer-score").hide();
     $("#question").hide();
@@ -99,10 +99,10 @@ $(document).ready(function () {
         showAnswer();
         if ($(this).attr("class").search("correct") === -1) {
             console.log(`${$(this).text()} is wrong`)
-            $("#incorrect").text(++incorrect);
+            $("#incorrect").text(`Incorrect: ${++incorrect}`);
         } else {
             console.log("correct :-)")
-            $("#correct").text(++correct);
+            $("#correct").text(`Correct: ${++correct}`);
         }
     });
 
