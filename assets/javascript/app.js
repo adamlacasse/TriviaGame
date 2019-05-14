@@ -62,14 +62,21 @@ $(document).ready(function () {
     $("#correct").html(`<h3>${correct} correct</h3>`);
     $("#incorrect").html(`<h3>${incorrect} incorrect</h3>`);
 
+    $("#timer-score").hide();
+    $("#question").hide();
+
     function loadQuestion() {
-        // put the question at the top
-        $("#question").css("display", "true")
+        $("#timer-score").show();
+        $("#question").show();
         $("#question").html(`<div class="" style="width: 50%">${questions[currentQuestion].question}</div><br>`)
         // make buttons for each choice
-        questions[currentQuestion].choices.forEach(c => {
-            $("#answers").append(`<button class="btn btn-dark btn-lg m-1 answer" style="width: 50%">${c}</button><br>`)
-        })
+        questions[currentQuestion].choices.forEach(choice => {
+            if (choice === questions[currentQuestion].correctAnswer) {
+                $("#answers").append(`<button class="btn btn-dark btn-lg m-1 answer correct" style="width: 50%">${choice}</button><br>`)
+            } else {
+                $("#answers").append(`<button class="btn btn-dark btn-lg m-1 answer" style="width: 50%">${choice}</button><br>`)
+            }
+        });
     }
 
     $("#start-button").on("click", function () {
@@ -78,7 +85,11 @@ $(document).ready(function () {
     });
 
     $("body").on("click", ".answer", function () {
-        $(this).attr("class", "btn btn-success btn-lg m-1 answer")
+        if ($(this).attr("class").search("correct") === -1) {
+            console.log("wrong!")
+        } else {
+            console.log("correct :-)")
+        }
     });
 
     $("#timer").on("click", function () {
