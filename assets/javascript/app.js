@@ -86,7 +86,7 @@ $(document).ready(function () {
 
     $("body").on("click", ".answer", function () {
         if ($(this).attr("class").search("correct") === -1) {
-            console.log("wrong!")
+            console.log(`${$(this).text()} is wrong`)
         } else {
             console.log("correct :-)")
         }
