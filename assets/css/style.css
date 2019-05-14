@@ -20,7 +20,7 @@ body {
     font-size: 30px;
 }
 
-button {
+#start-button, .answer {
     background: transparent !important;
     border-color: white !important;
 }

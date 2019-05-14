@@ -52,8 +52,9 @@ $(document).ready(function () {
         }
     ]
 
-    const currentQuestion = 0;
+    let currentQuestion = 0;
     let timer;
+    let timerOn = false;
     let countdown = 20;
     let correct = 0;
     let incorrect = 0;
@@ -79,12 +80,24 @@ $(document).ready(function () {
         });
     }
 
+    function showAnswer() {
+        $("#answers").empty();
+        questions[currentQuestion].choices.forEach(choice => {
+            if (choice === questions[currentQuestion].correctAnswer) {
+                $("#answers").append(`<button class="btn btn-success btn-lg m-1 correct" style="width: 50%">${choice}</button><br>`)
+            } else {
+                $("#answers").append(`<button class="btn btn-danger btn-lg m-1" style="width: 50%">${choice}</button><br>`)
+            }
+        });
+    }
+
     $("#start-button").on("click", function () {
         $("#start-button").remove();
         loadQuestion();
     });
 
     $("body").on("click", ".answer", function () {
+        showAnswer();
         if ($(this).attr("class").search("correct") === -1) {
             console.log(`${$(this).text()} is wrong`)
         } else {
