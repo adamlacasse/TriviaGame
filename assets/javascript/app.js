@@ -55,6 +55,12 @@ $(document).ready(function () {
     const currentQuestion = 0;
     let timer;
     let countdown = 20;
+    let correct = 0;
+    let incorrect = 0;
+    let unanswered = questions.length;
+
+    $("#correct").html(`<h3>${correct} correct</h3>`);
+    $("#incorrect").html(`<h3>${incorrect} incorrect</h3>`);
 
     function loadQuestion() {
         // put the question at the top
