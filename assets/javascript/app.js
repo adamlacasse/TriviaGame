@@ -69,6 +69,7 @@ $(document).ready(function () {
     function loadQuestion() {
         $("#timer-score").show();
         $("#question").show();
+        $("#answers").empty();
         $("#question").html(`<div class="" style="width: 50%">${questions[currentQuestion].question}</div><br>`)
         questions[currentQuestion].choices.forEach(choice => {
             if (choice === questions[currentQuestion].correctAnswer) {
@@ -104,6 +105,17 @@ $(document).ready(function () {
         } else {
             console.log("correct :-)")
             $("#correct").text(`Correct: ${++correct}`);
+        }
+    });
+
+    $("body").on("click", ".next", function () {
+        currentQuestion++;
+        if (currentQuestion === questions.length) {
+            $("#question").hide();
+            $("#answers").empty();
+            $("#answers").append(`<img src="./assets/images/theEnd.jpg">`);
+        } else {
+            loadQuestion();
         }
     });
 
