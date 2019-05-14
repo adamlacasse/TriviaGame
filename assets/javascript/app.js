@@ -60,8 +60,8 @@ $(document).ready(function () {
     let incorrect = 0;
     let unanswered = questions.length;
 
-    $("#correct").html(`<h3>${correct} correct</h3>`);
-    $("#incorrect").html(`<h3>${incorrect} incorrect</h3>`);
+    $("#correct").text(`Correct: ${correct}`);
+    $("#incorrect").text(incorrect);
 
     $("#timer-score").hide();
     $("#question").hide();
@@ -70,7 +70,6 @@ $(document).ready(function () {
         $("#timer-score").show();
         $("#question").show();
         $("#question").html(`<div class="" style="width: 50%">${questions[currentQuestion].question}</div><br>`)
-        // make buttons for each choice
         questions[currentQuestion].choices.forEach(choice => {
             if (choice === questions[currentQuestion].correctAnswer) {
                 $("#answers").append(`<button class="btn btn-dark btn-lg m-1 answer correct" style="width: 50%">${choice}</button><br>`)
@@ -100,8 +99,10 @@ $(document).ready(function () {
         showAnswer();
         if ($(this).attr("class").search("correct") === -1) {
             console.log(`${$(this).text()} is wrong`)
+            $("#incorrect").text(++incorrect);
         } else {
             console.log("correct :-)")
+            $("#correct").text(++correct);
         }
     });
 
