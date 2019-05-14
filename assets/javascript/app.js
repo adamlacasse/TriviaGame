@@ -88,6 +88,7 @@ $(document).ready(function () {
                 $("#answers").append(`<button class="btn btn-danger btn-lg m-1" style="width: 50%">${choice}</button><br>`)
             }
         });
+        $("#answers").append(`<button class="btn btn-dark btn-lg m-1 next" style="width: 50%">Next Question</button><br>`);
     }
 
     $("#start-button").on("click", function () {
