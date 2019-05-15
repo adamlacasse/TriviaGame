@@ -66,9 +66,15 @@ $(document).ready(function () {
     $("#timer-score").hide();
     $("#question").hide();
 
+    function decrementer () {
+        $("#timer").text(--countdown);
+    }
+
     function loadQuestion() {
         $("#timer-score").show();
         $("#question").show();
+        $("#timer").text(20);
+        timer = setInterval(decrementer, 1000);
         $("#answers").empty();
         $("#question").html(`<div class="" style="width: 50%">${questions[currentQuestion].question}</div><br>`)
         questions[currentQuestion].choices.forEach(choice => {
@@ -89,7 +95,7 @@ $(document).ready(function () {
                 $("#answers").append(`<button class="btn btn-danger btn-lg m-1" style="width: 50%">${choice}</button><br>`)
             }
         });
-        $("#answers").append(`<button class="btn btn-dark btn-lg m-1 next" style="width: 50%">Next Question</button><br>`);
+        $("#answers").append(`<button class="btn btn-dark btn-lg m-1 next" style="width: 50%">Next Question</button>`);
     }
 
     $("#start-button").on("click", function () {
@@ -98,6 +104,8 @@ $(document).ready(function () {
     });
 
     $("body").on("click", ".answer", function () {
+        clearInterval(timer);
+        countdown = 20;
         showAnswer();
         if ($(this).attr("class").search("correct") === -1) {
             console.log(`${$(this).text()} is wrong`)
@@ -119,20 +127,6 @@ $(document).ready(function () {
         }
     });
 
-    $("#timer").on("click", function () {
-        if ($(this).attr("data-timer") === "on") {
-            clearInterval(timer);
-            $(this).attr("data-timer", "off")
-        } else {
-            countdown = 20;
-            $("#timer").text(countdown);
-            timer = setInterval(() => {
-                countdown--
-                $("#timer").text(countdown);
-            }, 1000)
-            $(this).attr("data-timer", "on")
-        }
-    });
 
 
 
