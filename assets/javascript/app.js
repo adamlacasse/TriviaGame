@@ -54,7 +54,6 @@ $(document).ready(function () {
 
     let currentQuestion = 0;
     let timer;
-    let timerOn = false;
     let countdown = 20;
     let correct = 0;
     let incorrect = 0;
@@ -68,11 +67,16 @@ $(document).ready(function () {
 
     function decrementer () {
         $("#timer").text(--countdown);
+        if (countdown === 10) {
+            console.log(`it's at 10`)
+            $("#timer").addClass("low-count");
+        }
     }
 
     function loadQuestion() {
         $("#timer-score").show();
         $("#question").show();
+        $("#timer").removeClass("low-count");
         $("#timer").text(20);
         timer = setInterval(decrementer, 1000);
         $("#answers").empty();
@@ -126,9 +130,6 @@ $(document).ready(function () {
             loadQuestion();
         }
     });
-
-
-
 
 
 
