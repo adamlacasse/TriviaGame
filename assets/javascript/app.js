@@ -57,7 +57,7 @@ $(document).ready(function () {
     let countdown = 20;
     let correct = 0;
     let incorrect = 0;
-    let unanswered = questions.length;
+    let timedOut = 0;
 
     $("#correct").text(`Correct: ${correct}`);
     $("#incorrect").text(`Incorrect: ${incorrect}`);
@@ -71,12 +71,20 @@ $(document).ready(function () {
             console.log(`it's at 10`)
             $("#timer").addClass("low-count");
         }
+        if (countdown === 0) {
+            incorrect++;
+            timedOut++;
+            showAnswer();
+            $("#timer").html(`<img src="./assets/images/alarmClock.gif">`)
+        }
     }
 
     function loadQuestion() {
         $("#timer-score").show();
         $("#question").show();
         $("#timer").removeClass("low-count");
+        $("#correct").text(`Correct: ${correct}`);
+        $("#incorrect").text(`Incorrect: ${incorrect}`);
         $("#timer").text(20);
         timer = setInterval(decrementer, 1000);
         $("#answers").empty();
@@ -91,6 +99,10 @@ $(document).ready(function () {
     }
 
     function showAnswer() {
+        clearInterval(timer);
+        countdown = 20;
+        $("#correct").text(`Correct: ${correct}`);
+        $("#incorrect").text(`Incorrect: ${incorrect}`);
         $("#answers").empty();
         questions[currentQuestion].choices.forEach(choice => {
             if (choice === questions[currentQuestion].correctAnswer) {
@@ -99,7 +111,11 @@ $(document).ready(function () {
                 $("#answers").append(`<button class="btn btn-danger btn-lg m-1" style="width: 50%">${choice}</button><br>`)
             }
         });
-        $("#answers").append(`<button class="btn btn-dark btn-lg m-1 next" style="width: 50%">Next Question</button>`);
+        if (currentQuestion === questions.length) {
+            $("#answers").append(`<button class="btn btn-dark btn-lg m-1 next" style="width: 50%">That's It!</button>`);
+        } else {
+            $("#answers").append(`<button class="btn btn-dark btn-lg m-1 next" style="width: 50%">Next Question</button>`);
+        }
     }
 
     $("#start-button").on("click", function () {
@@ -108,8 +124,7 @@ $(document).ready(function () {
     });
 
     $("body").on("click", ".answer", function () {
-        clearInterval(timer);
-        countdown = 20;
+
         showAnswer();
         if ($(this).attr("class").search("correct") === -1) {
             console.log(`${$(this).text()} is wrong`)
@@ -125,19 +140,13 @@ $(document).ready(function () {
         if (currentQuestion === questions.length) {
             $("#question").hide();
             $("#answers").empty();
+            $("#timer").removeClass("low-count");
+            $("#timer").text(`Timed Out: ${timedOut}`)
             $("#answers").append(`<img src="./assets/images/theEnd.jpg">`);
         } else {
             loadQuestion();
         }
     });
-
-
-
-
-
-
-
-
 
 
 }); // end of document.ready
